@@ -5,7 +5,7 @@ set architecture aarch64
 target remote localhost:1234
 
 # Load the symbol file at the correct memory address (QEMU's base address for the virt machine)
-file kernel.elf
+file ./kernel/kernel.elf
 
 # Set a breakpoint at the program's entry point
 break _start
