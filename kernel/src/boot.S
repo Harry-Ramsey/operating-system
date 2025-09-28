@@ -1,6 +1,8 @@
 .global _start
 .section .text
 
+.extern _vector_table_el1
+
 _start:
     mrs x0, CurrentEL
     cmp x0, #(0x03 << 2)
@@ -15,6 +17,8 @@ el2_entry:
     msr elr_el2, x0
     eret
 el1_entry:
+    ldr x1, =_vector_table_el1
+    msr vbar_el1, x1
     ldr x30, =_stack_top
     mov SP, X30
     bl main
