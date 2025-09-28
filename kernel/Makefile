@@ -3,11 +3,15 @@
 include ../common.mk
 
 SRC_DIR := src
+INCLUDE_DIR := include
+
+CFLAGS += -I$(INCLUDE_DIR) -g
+ASMFLAGS += -I$(INCLUDE_DIR) -g
 
 C_SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 ASM_SRC_FILES := $(wildcard $(SRC_DIR)/*.S)
 
-LINKER_FILE = $(SRC_DIR)/linker.ld
+LINKER_FILE = $(SRC_DIR)/linker.ld -g
 
 C_OBJ_FILES := $(C_SRC_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 ASM_OBJ_FILES := $(ASM_SRC_FILES:$(SRC_DIR)/%.S=$(BUILD_DIR)/%.o)
