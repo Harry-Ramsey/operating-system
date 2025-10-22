@@ -8,7 +8,8 @@ SECTIONS {
     }
     .data : { *(.data) }
     .bss : { *(.bss) }
-    . = ALIGN(16);
-    . = . + 0x1000;
+    . = ALIGN(0x1000);    /* ensure the current location is 4KB aligned */
+    l1_table = .;
+    . = . + 0x1000;       /* reserve one page for L1 table */
     stack_top = .;
 }
