@@ -6,7 +6,7 @@ SECTIONS
 
     /* --- Code section --- */
     .text : ALIGN(4K) {
-        *(.text.boot)    /* optional if you have a boot.S */
+        /* *(.text.boot)    /* optional if you have a boot.S */
         *(.text)
         *(.rodata*)      /* const data and strings */
     }
@@ -27,6 +27,10 @@ SECTIONS
     _stack_bottom = .;
     . = . + 0x1000;     /* 4KB stack */
     _stack_top = .;
+
+    . = ALIGN(4K);
+    _el1_l0_table = .;
+    . = . + 0x1000;
 
     /* --- End of kernel image --- */
     _end = .;
