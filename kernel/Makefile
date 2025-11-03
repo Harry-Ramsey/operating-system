@@ -10,6 +10,7 @@ ASMFLAGS += -I$(INCLUDE_DIR) -g
 
 C_SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
 ASM_SRC_FILES := $(wildcard $(SRC_DIR)/*.S)
+ASM_SRC_FILES += $(wildcard $(SRC_DIR)/utils/*.S)
 
 LINKER_FILE = $(SRC_DIR)/linker.ld -g
 
@@ -22,7 +23,7 @@ OBJ_FILES := $(C_OBJ_FILES) $(ASM_OBJ_FILES)
 all: $(ELF_FILE)
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/utils
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
