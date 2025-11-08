@@ -28,3 +28,39 @@ void uart_puts(const char *s) {
     }
 }
 
+void uart_puthex(uint64_t v) {
+    uart_puts("0x");
+
+    if (v == 0)
+        uart_puts("00");
+
+    while (v > 0) {
+        uint64_t remainder = v % 16;
+        switch(remainder) {
+            case 10:
+                uart_putc('A');
+                break;
+            case 11:
+                uart_putc('B');
+                break;
+            case 12:
+                uart_putc('C');
+                break;
+            case 13:
+                uart_putc('D');
+                break;
+            case 14:
+                uart_putc('E');
+                break;
+            case 15:
+                uart_putc('F');
+                break;
+            default:
+                uart_putc((char)(remainder + 48));
+        }
+
+        v /= 16;
+    }
+
+
+}
