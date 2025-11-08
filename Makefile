@@ -20,3 +20,8 @@ run: kernel
 debug: kernel
 	@echo ">>> Running kernel in QEMU (debug mode)..."
 	qemu-system-aarch64 -M virt,secure=on -smp 1 -m 1G -cpu cortex-a53 -kernel $(KERNEL_DIR)/kernel.elf -s -S
+
+device_tree: kernel
+	@echo ">>> Creating Device Tree..."
+	qemu-system-aarch64 -M virt,secure=on,dumpdtb=qemu.dtb -smp 1 -m 2G -cpu cortex-a53 -kernel $(KERNEL_DIR)/kernel.elf -s -S
+	dtc qemu.dtb -o qemu.fdt
