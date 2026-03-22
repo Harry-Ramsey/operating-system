@@ -105,10 +105,16 @@ zero_table:
     ldr x0, =TT_S1_DEVICE_nGnRnE
     str x0, [x1]
 
-    // [1]: 0x4000_0000–0x7FFF_FFFF (RAM)
+    // [1]: 0x4000_0000-0x7FFF_FFFF (various)
+    // Todo: Fix up memory map, should not be all normal for FVP
     ldr x0, =TT_S1_NORMAL_WBWA
     orr x0, x0, #0x40000000
     str x0, [x1, #8]
+
+    // [1]: 0x8000_0000–0xBFFF_FFFF (RAM)
+    ldr x0, =TT_S1_NORMAL_WBWA
+    orr x0, x0, #0x80000000
+    str x0, [x1, #16]
 
     dsb sy
     isb

@@ -14,9 +14,6 @@ clean:
 	@rm -rf $(BUILD_DIR) $(ELF_FILE)
 
 run: kernel
-	@echo ">>> Running kernel in QEMU..."
-	qemu-system-aarch64 -M virt -cpu cortex-a53 -kernel $(KERNEL_DIR)/kernel.elf
+	@echo ">>> Running kernel on ARM FVP..."
+	$(FVP_MODEL_PATH) -C bp.flashloader0.fname="" -C bp.flashloader1.fname="" -C bp.secureflashloader.fname="" -C cluster0.NUM_CORES=1 -C bp.secure_memory=0 -C bp.vis.disable_visualisation=1 -a $(KERNEL_DIR)/kernel.elf
 
-debug: kernel
-	@echo ">>> Running kernel in QEMU (debug mode)..."
-	qemu-system-aarch64 -M virt,secure=on -smp 1 -m 1G -cpu cortex-a53 -kernel $(KERNEL_DIR)/kernel.elf -s -S

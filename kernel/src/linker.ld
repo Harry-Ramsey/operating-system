@@ -2,7 +2,7 @@ ENTRY(_start)
 SECTIONS
 {
     /* Load address where kernel is placed by the bootloader */
-    . = 0x0000000040000000;
+    . = 0x80080000;
 
     /* --- Code section --- */
     .text : ALIGN(4K) {
