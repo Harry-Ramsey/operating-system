@@ -1,10 +1,11 @@
 #include <stdint.h>
 
 #include "console/uart.h"
+#include "stdlib/stdio.h"
 
 int main(int argc, char **argv) {
     uart_init();
-    uart_puts("Hello world\n");
+    printf("Hello world\n");
     return 0;
 }
 
