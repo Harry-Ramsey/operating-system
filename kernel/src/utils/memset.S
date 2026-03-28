@@ -2,7 +2,7 @@
 
 // void *memset(void *dst, int value, size_t n)
 .global memset
-.type memset, %function
+//.type memset, %function
 memset:
     cbz     x2, .ret
     mov     x9, x0

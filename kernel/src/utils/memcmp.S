@@ -3,7 +3,7 @@
 // int memcmp(const void *s1, const void *s2, size_t n)
 // Return: 0 if equal, -1 if s1 < s2, 1 if s1 > s2
 .global memcmp
-.type memcmp, %function
+//.type memcmp, %function
 memcmp:
     cbz x2, .ret_eq               // if n == 0
 

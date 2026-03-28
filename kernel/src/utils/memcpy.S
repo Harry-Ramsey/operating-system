@@ -2,7 +2,7 @@
 
 // void *memcpy(void *dst, const void *src, size_t n)
 .global memcpy
-.type memcpy, %function
+//.type memcpy, %function
 memcpy:
     cbz     x2, .ret
     mov     x9, x0
