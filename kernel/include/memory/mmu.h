@@ -1,6 +1,10 @@
 #ifndef MMU_H
 #define MMU_H
 
+#include "sysreg.h"
+
+#include <stdint.h>
+
 #define PTE_NS      (0b1  << 63)
 #define PTE_AP      (0b11 << 61)
 #define PTE_PXN     (0b1 << 54)
@@ -10,6 +14,8 @@
 
 #define PTE_TABLE   (0b1  <<  1)
 #define PTE_VALID   (0b1  <<  0)
+
+#define PTE_ADDR_MASK 0x0000FFFFFFFFF000ULL
 
 #define PTE_NG      (0b1  << 11)
 #define PTE_AF      (0b1  << 10)
@@ -23,14 +29,14 @@
 #define MMU_SH_OUTER    (0b10)
 #define MMU_SH_INNER    (0b11)
 
-
-#define SCTLR_EL1_SA0   (0b1 << 4)
-#define SCTLR_EL1_SA    (0b1 << 3)
-#define SCTLR_EL1_C     (0b1 << 2)
-#define SCTLR_EL1_A     (0b1 << 1)
-#define SCTLR_EL1_M     (0b1 << 0)
+#define L0_INDEX(va)    ((va >> 39) & 0x1FF)
+#define L1_INDEX(va)    ((va >> 30) & 0x1FF)
+#define L2_INDEX(va)    ((va >> 21) & 0x1FF)
+#define L3_INDEX(va)    ((va >> 12) & 0x1FF)
+#define L3_OFFSET(va)   ((va >> 0)  & 0xFFF)
 
 void mmu_enable();
+void mmu_map_virt_to_phys(uint64_t *l0_table, uint64_t virt, uint64_t phys, uint64_t flags);
 void mmu_disable();
 
 #endif /* MMU_H */
